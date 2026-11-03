@@ -1,2 +1,105 @@
-﻿case_key,title,module,test_type,priority,preconditions,steps,expected_result,requirement_ref
-TC-MOD-001,Verify expected application behavior,Module name,Happy path,Alta,Required initial state,1. Perform action; 2. Verify response,Expected observable result,REQ-001
+﻿case_key,title,description,module,test_type,priority,preconditions,steps,expected_result,requirement_ref
+RESP-GP-001,Create a Responsible account using email,Validate successful account creation and entry into the Responsible onboarding flow.,Account,Golden Path,Critical,BA Protege+ is installed; user has a valid email address not previously registered; internet connection is available.,"1. Open BA Protege+.
+2. Select the Responsible mode.
+3. Choose the create-account option.
+4. Enter valid required registration details.
+5. Submit the registration form.",The account is created successfully and the user can continue into the Responsible setup flow without an unexpected error.,BA-PROTEGE+ / Current build
+RESP-GP-002,Sign in with an existing Google account,Validate the available Google sign-in option for a user with an eligible Google account.,Account,Golden Path,Critical,BA Protege+ is installed; a valid Google account is available; internet connection is available; account state is known (new or previously linked).,"1. Open BA Protege+.
+2. Select the Responsible mode.
+3. Open the login screen.
+4. Select Continue with Google.
+5. Choose the intended Google account.
+6. Complete any consent or authentication prompt.",Google authentication completes and the app establishes the expected authenticated session. The resulting account state is consistent with the selected Google account.,BA-PROTEGE+ / Current build
+RESP-GP-003,Complete initial Responsible setup,Validate the main initial setup path for a newly authenticated Responsible user.,Initial Setup,Golden Path,Critical,User is authenticated as Responsible and has not completed initial setup.,"1. Continue from successful registration or login.
+2. Select the intended usage mode.
+3. Complete the initial configuration screens using valid data.
+4. Continue through the setup flow.",The initial setup completes and the user reaches the appropriate next screen without being blocked by optional permissions.,BA-PROTEGE+ / Current build
+RESP-GP-004,Reach the daily-use Home after initial setup,Validate the transition from first-time setup to the normal Home experience.,Home,Golden Path,High,User has completed the initial Responsible setup.,"1. From the setup completion screen, select the option to return to the beginning/Home.
+2. Observe the Home screen.",The daily-use Home screen is displayed rather than the first-time onboarding Home.,BA-PROTEGE+ / Current build
+RESP-FUN-028,Activate and configure Self-Control,Validate the available independent Self-Control flow on the Responsible device.,Self-Control,Functional,Critical,User is authenticated in Responsible mode; Self-Control feature is available in the current build; internet connection is available if required by the feature.,"1. Open the Self-Control section.
+2. Start or activate Self-Control.
+3. Configure the available protection settings.
+4. Save or confirm the configuration.
+5. Verify the configured state and available blocking behavior using an approved test site.",Self-Control can be activated and configured independently of linking another protected device. The saved configuration is reflected in the UI and the configured protection behavior is applied.,BA-PROTEGE+ / Current build
+RESP-FUN-001,Display Responsible mode entry options,Verify that the user can identify and select Responsible mode during entry.,Onboarding,Functional,High,App is installed and opened in a clean or logged-out state.,"1. Launch the application.
+2. Review the available modes.
+3. Select Responsible mode.",Responsible mode is available and the application navigates to the corresponding authentication or onboarding flow.,BA-PROTEGE+ / Current build
+RESP-FUN-002,Register with valid email details,Verify validation and submission of a valid email-based registration form.,Account,Functional,High,User is on the account creation screen; email is not already registered.,"1. Enter valid values in all required fields.
+2. Submit the form.",The form accepts valid data and proceeds with account creation. No validation error is displayed for valid fields.,BA-PROTEGE+ / Current build
+RESP-FUN-003,Prevent registration with an invalid email,Verify client-side or server-side validation for malformed email input.,Account,Negative,Medium,User is on the account creation screen.,"1. Enter an invalid email format.
+2. Complete other required fields with valid values.
+3. Submit the form.",Registration is not completed. A clear validation message identifies the invalid email field.,BA-PROTEGE+ / Current build
+RESP-FUN-004,Prevent registration with missing required fields,Verify required-field validation during account creation.,Account,Negative,Medium,User is on the account creation screen.,"1. Leave one or more required fields empty.
+2. Submit the form.",Registration is not completed and the missing required fields are indicated. The exact required fields should match the current UI.,BA-PROTEGE+ / Current build
+RESP-FUN-005,Sign in with valid email credentials,Verify standard email/password authentication.,Account,Functional,Medium,A registered Responsible account exists and the user is logged out.,"1. Open the login screen.
+2. Enter the registered email and correct password.
+3. Submit the login form.",Authentication succeeds and the user enters the authenticated Responsible experience.,BA-PROTEGE+ / Current build
+RESP-FUN-006,Reject login with an incorrect password,Verify that invalid credentials do not establish a session.,Account,Negative,Medium,A registered Responsible account exists and the user is logged out.,"1. Open the login screen.
+2. Enter the registered email and an incorrect password.
+3. Submit the login form.","Authentication is rejected, the user remains logged out, and an appropriate error message is displayed.",BA-PROTEGE+ / Current build
+RESP-FUN-007,Handle Google sign-in cancellation,Verify behavior when the user cancels the Google authentication flow.,Account,Negative,Medium,User is on the login screen; Google sign-in is available.,"1. Select Continue with Google.
+2. Cancel or close the Google account selection/authentication prompt.",The app does not create an authenticated session and returns to a stable login state without crashing.,BA-PROTEGE+ / Current build
+RESP-FUN-008,Handle Google sign-in with an existing linked account,Verify the expected account behavior when the selected Google identity is already associated with an account.,Account,Functional,Medium,A Google identity is already linked to an existing BA Protege+ account.,"1. Open the login screen.
+2. Select Continue with Google.
+3. Choose the already-linked Google identity.
+4. Complete authentication.",The existing associated account is accessed; no unintended duplicate account is created.,BA-PROTEGE+ / Current build
+RESP-FUN-009,Display optional permission requests during setup,Verify that the available permission options are presented to the user.,Permissions,Functional,Medium,User is progressing through Responsible initial setup on a compatible Android device.,"1. Continue through setup until the permissions screen or prompts appear.
+2. Review VPN, Accessibility, Notifications, Battery Optimization and Location options.",The available permission options are displayed with understandable labels and actions. No permission is assumed mandatory based on the current product definition.,BA-PROTEGE+ / Current build
+RESP-FUN-010,Continue setup without granting optional permissions,Verify that declining or skipping optional permissions does not block setup.,Permissions,Functional,Medium,User is at the permission stage; none of the listed permissions has been granted.,"1. Decline or skip each optional permission when prompted.
+2. Continue through the setup flow.",The app allows the user to continue. Setup is not blocked solely because optional permissions were not granted.,BA-PROTEGE+ / Current build
+RESP-FUN-011,Grant an optional permission and return to the app,Verify that granting an optional permission returns the user to a usable app state.,Permissions,Functional,Medium,User is at a permission prompt; the Android system permission/settings screen is available.,"1. Select the action to configure one optional permission.
+2. Grant or enable that permission in Android.
+3. Return to BA Protege+.",The app resumes without crashing and reflects the updated permission state where applicable.,BA-PROTEGE+ / Current build
+RESP-FUN-012,Generate a six-digit device-linking PIN,Verify the Responsible-side availability of the PIN generation path.,Device Linking,Functional,Medium,User is authenticated in Responsible mode; the linking feature is available; protected mode completion is not required for this test.,"1. Open Devices.
+2. Select the option to link a new device.
+3. Choose the six-digit PIN method.
+4. Observe the generated or displayed PIN flow.",The PIN method opens and presents the expected six-digit code or the corresponding code-generation state on the Responsible side. Full end-to-end linking is out of scope until Protected mode is ready.,BA-PROTEGE+ / Current build
+RESP-FUN-013,Display the QR linking alternative,Verify that the QR alternative can be selected independently from the PIN method.,Device Linking,Functional,Medium,User is authenticated in Responsible mode and has opened the new-device linking flow.,"1. Open the device-linking flow.
+2. Select the Scan QR / QR method instead of the PIN method.
+3. Observe the QR display.",The QR method is displayed as a separate alternative. Selecting QR does not simultaneously require PIN entry. Full scanning/linking is out of scope until Protected mode is ready.,BA-PROTEGE+ / Current build
+RESP-FUN-014,Switch between PIN and QR alternatives,Verify that the user can choose one linking method without combining both methods.,Device Linking,Functional,Medium,User is on the device-linking screen.,"1. Select the PIN tab.
+2. Verify the PIN entry/generation view.
+3. Select the QR tab.
+4. Verify the QR view.",Only the selected method is active at a time; the two methods remain independent alternatives.,BA-PROTEGE+ / Current build
+RESP-FUN-015,Display the daily-use Home after returning from setup,Verify the Home screen state after the user chooses to return to Home.,Home,Functional,Medium,Initial Responsible setup has been completed.,"1. Select Return to Home / Go to Home.
+2. Inspect the Home screen content and layout.","The normal daily-use Home is displayed, not the first-time setup Home.",BA-PROTEGE+ / Current build
+RESP-FUN-016,Open and review linked-device list,Verify that the Responsible user can view devices currently linked to the account.,Devices,Functional,Medium,Authenticated Responsible account has at least one linked device in the current build/test data.,"1. Open Devices.
+2. Review the linked-device list.",The list displays the linked devices and their available identifying/status information without missing or duplicated entries.,BA-PROTEGE+ / Current build
+RESP-FUN-017,Edit linked-device details,Verify that device details can be edited and saved.,Devices,Functional,Medium,At least one linked device is present.,"1. Open Devices.
+2. Select a linked device.
+3. Choose Edit.
+4. Modify an editable field with valid data.
+5. Save changes.",The updated device details are saved and displayed correctly in the Responsible app and are reflected on the other device where the product supports synchronization.,BA-PROTEGE+ / Current build
+RESP-FUN-018,Edit personal data associated with a linked device,Verify the personal-data editing form and persistence.,Devices,Functional,Medium,A linked device is present and the personal-data edit option is available.,"1. Open the linked-device details.
+2. Open the personal-data editing option.
+3. Modify one or more editable fields with valid data.
+4. Save changes.",The form accepts valid data and the updated personal information is displayed after saving. Changes synchronize to the other device where applicable.,BA-PROTEGE+ / Current build
+RESP-FUN-019,Cancel editing linked-device details,Verify that unsaved edits are discarded when the user cancels.,Devices,Negative,Medium,A linked device is present and its edit form is open.,"1. Modify one or more fields.
+2. Select Back or Cancel without saving.
+3. Reopen the device details.",The original saved values remain unchanged; unsaved modifications are not persisted.,BA-PROTEGE+ / Current build
+RESP-FUN-020,Start device unlinking and display first confirmation,Verify the first confirmation step before unlinking a device.,Devices,Functional,Medium,A linked device is present.,"1. Open Devices.
+2. Select the device to unlink.
+3. Choose Delete / Unlink.",The first confirmation dialog is displayed and identifies the unlinking action and its consequences.,BA-PROTEGE+ / Current build
+RESP-FUN-021,Cancel device unlinking at first confirmation,Verify that cancellation at the first confirmation preserves the link.,Devices,Negative,Medium,A linked device is present and the first unlink confirmation is displayed.,"1. Select Cancel or the option to go back.
+2. Return to the device list.",The device remains linked and is still present in the list.,BA-PROTEGE+ / Current build
+RESP-FUN-022,Complete both device unlink confirmations,Verify that unlinking requires both confirmation steps and removes the device from the list.,Devices,Functional,Medium,A linked device is present and the unlink action is available.,"1. Open the device unlink action.
+2. Accept the first confirmation.
+3. Review the second confirmation.
+4. Confirm unlinking in the second dialog.
+5. Return to the device list.","Both confirmations are required. After the second confirmation, the device is unlinked and no longer appears in the linked-device list. The change is reflected on the other device where applicable.",BA-PROTEGE+ / Current build
+RESP-FUN-023,Enforce 24-hour relinking wait for the same device,Verify the stated 24-hour restriction after unlinking a device.,Devices,Negative,Medium,A device has just been successfully unlinked; its identity is available for another linking attempt.,"1. Attempt to link the same device again before 24 hours have elapsed.
+2. Observe the app response.","The same device cannot be linked again before the 24-hour waiting period expires, and the app communicates the restriction clearly. Exact boundary behavior at 24 hours should be verified when product rules are confirmed.",BA-PROTEGE+ / Current build
+RESP-FUN-024,Activate Self-Control without linking another device,Verify Self-Control is independent from protected-device linking.,Self-Control,Functional,Medium,User is authenticated in Responsible mode; no other device is linked.,"1. Open Self-Control.
+2. Start the activation flow.
+3. Complete the required configuration.",Self-Control can be activated without linking another device.,BA-PROTEGE+ / Current build
+RESP-FUN-025,Save Self-Control configuration,Verify that Self-Control settings persist after saving and navigating away.,Self-Control,Functional,Medium,Self-Control is available and user can access its settings.,"1. Open Self-Control settings.
+2. Change an available setting.
+3. Save or confirm changes.
+4. Navigate away and return to Self-Control settings.",The saved settings persist and are displayed consistently after reopening the section.,BA-PROTEGE+ / Current build
+RESP-FUN-026,Verify Self-Control site blocking behavior,Verify that a configured blocked site is actually restricted on the Responsible device.,Self-Control,Functional,Medium,Self-Control is active; a safe test domain is configured as blocked; test device has internet access.,"1. Configure a test website as blocked in Self-Control.
+2. Save the configuration.
+3. Open the test website using the supported browser on the same device.","The configured site is blocked according to the feature behavior. Record the exact browser, URL and observed message in Actual Result.",BA-PROTEGE+ / Current build
+RESP-FUN-027,Verify Self-Control can be disabled or reconfigured,Verify the available controls for changing or disabling Self-Control.,Self-Control,Functional,Medium,Self-Control is active and its settings screen is accessible.,"1. Open Self-Control settings.
+2. Modify or disable the protection using the available controls.
+3. Save or confirm the change.
+4. Verify the resulting state.",The requested configuration change is applied and the UI reflects the current Self-Control state.,BA-PROTEGE+ / Current build
