@@ -1,0 +1,2 @@
+﻿case_key,title,module,test_type,priority,preconditions,steps,expected_result,requirement_ref
+TC-MOD-001,Verify expected application behavior,Module name,Happy path,Alta,Required initial state,1. Perform action; 2. Verify response,Expected observable result,REQ-001

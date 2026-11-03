@@ -1,0 +1,13 @@
+[
+  {
+    "case_key": "TC-MOD-001",
+    "title": "Verify expected application behavior",
+    "module": "Module name",
+    "test_type": "Happy path",
+    "priority": "Alta",
+    "preconditions": "Required initial state",
+    "steps": "1. Perform action; 2. Verify response",
+    "expected_result": "Expected observable result",
+    "requirement_ref": "REQ-001"
+  }
+]

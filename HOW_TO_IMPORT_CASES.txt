@@ -1,0 +1,16 @@
+BA PROTEGE+ QA CONTROL CENTER — TEST CASE IMPORT
+
+Supported: XLSX, CSV, JSON. XLSX/CSV use the first sheet/file and first row as headers.
+
+Required columns: case_key, title, module, steps, expected_result.
+Optional: test_type, priority, preconditions, requirement_ref.
+
+Rules:
+- case_key must be unique (example TC-ONB-001). Existing keys are skipped.
+- One row/object represents one test case.
+- Keep steps actionable and reproducible. Separate steps with semicolons or numbered text.
+- expected_result must describe an observable outcome.
+- Import adds cases to the shared catalog; it does not automatically add them to a suite or execution.
+- In Excel, use the first worksheet named Test Cases.
+
+Workflow: Cases > Import cases > choose file > review result message. Then Suites > create/edit suite > select catalog cases. Finally Executions > New execution > select a suite or individual cases. The execution stores a snapshot of selected cases.
