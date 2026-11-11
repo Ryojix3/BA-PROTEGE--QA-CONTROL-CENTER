@@ -148,6 +148,25 @@ const sampleCase={case_key:'RESP-FUN-XXX',title:'Título del caso de prueba',des
 function caseCsv(rows){const keys=Object.keys(sampleCase);return [keys,...rows.map(r=>keys.map(k=>r[k]??''))].map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n')}
 function downloadCaseXlsx(){if(!window.XLSX)throw new Error('No se pudo cargar el generador XLSX. Revisá la conexión.');const ws=XLSX.utils.json_to_sheet([sampleCase]);const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Test Cases');XLSX.writeFile(wb,'qa-test-case-template.xlsx')}
 const $$=s=>document.querySelectorAll(s);function updateSelectedCount(){const n=$$('#runCasePicker input:checked').length;const el=$('#selectedCaseCount');if(el)el.textContent=n+' seleccionados'}
+// Navegación prioritaria de Smoke Test: abrir la pantalla antes de consultar Supabase.
+document.addEventListener('click', function(e) {
+  const smokeNav = e.target.closest('button[data-page="smoke"], button[data-page="smokeHistory"]');
+  if (!smokeNav) return;
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  const targetPage = smokeNav.dataset.page;
+  page = targetPage;
+  notice = '';
+  if (targetPage === 'smoke') selectedSmokeExecution = null;
+  render();
+  refreshSmokeData()
+    .then(() => { if (page === targetPage) render(); })
+    .catch(err => {
+      notice = 'No se pudieron actualizar los datos de Smoke Test: ' + (err.message || 'Error de conexión o permisos');
+      render();
+    });
+}, true);
+
 document.addEventListener('click',function(e){
   const tab=e.target.closest('[data-run-filter]');
   if(!tab)return;
